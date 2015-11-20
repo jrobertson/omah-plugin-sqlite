@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = 'omah-plugin-sqlite'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.summary = 'This Omah (Offline Mail Helper) gem plugin saves new email message headers to a SQLite database.'
   s.authors = ['James Robertson']
   s.files = Dir['lib/omah-plugin-sqlite.rb']
-  s.add_runtime_dependency('omah', '~> 0.6', '>=0.6.12')
+  s.add_runtime_dependency('sqlite3', '~> 1.3', '>=1.3.11')
   s.signing_key = '../privatekeys/omah-plugin-sqlite.pem'
   s.cert_chain  = ['gem-public_cert.pem']
   s.license = 'MIT'
