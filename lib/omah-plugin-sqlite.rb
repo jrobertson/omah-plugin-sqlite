@@ -10,7 +10,11 @@ class OmahPluginSqlite
     
     dbfile = settings[:dbfile]
     
-    unless File.exists? dbfile then
+    if File.exists? dbfile then
+      
+      @db = SQLite3::Database.new dbfile      
+      
+    else
       
       @db = SQLite3::Database.new dbfile
         
@@ -25,6 +29,7 @@ class OmahPluginSqlite
 
   );
 SQL
+    
     end
 
 
