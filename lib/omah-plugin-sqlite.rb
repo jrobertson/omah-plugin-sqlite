@@ -39,7 +39,7 @@ SQL
 
     @db.execute("INSERT INTO headers (uid, from_x, to_x, subject, date) 
                VALUES (?, ?, ?, ?, ?)", [(Time.now.strftime("%y%m%d") + \
-                  h[:uid]).to_i] + %i(from to subject date).map{|x| h[x]} )
+                  h[:uid].to_s)] + %i(from to subject date).map{|x| h[x]} )
   end
 
 end
