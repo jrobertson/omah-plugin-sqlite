@@ -21,7 +21,7 @@ class OmahPluginSqlite
       # Create a database
       rows = @db.execute <<-SQL
   create table headers (
-    uid integer primary key,
+    id integer primary key autoincrement,
     from_x varchar(50),
     to_x varchar(50),
     subject varchar(140),
@@ -37,9 +37,8 @@ SQL
 
   def on_newmessage(h)
 
-    @db.execute("INSERT INTO headers (uid, from_x, to_x, subject, date) 
-               VALUES (?, ?, ?, ?, ?)", [(Time.now.strftime("%y%m%d") + \
-                  h[:uid].to_s)] + %i(from to subject date).map{|x| h[x]} )
+    @db.execute("INSERT INTO headers (from_x, to_x, subject, date) 
+               VALUES (?, ?, ?, ?)", %i(from to subject date).map{|x| h[x]} )
   end
 
 end
