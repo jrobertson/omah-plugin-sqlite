@@ -25,7 +25,8 @@ class OmahPluginSqlite
     from_x varchar(50),
     to_x varchar(50),
     subject varchar(140),
-    date timestamp
+    date timestamp,
+    filepath varchar(70)
 
   );
 SQL
@@ -37,8 +38,9 @@ SQL
 
   def on_newmessage(h)
 
-    @db.execute("INSERT INTO headers (from_x, to_x, subject, date) 
-               VALUES (?, ?, ?, ?)", %i(from to subject date).map{|x| h[x]} )
+    @db.execute("INSERT INTO headers (from_x, to_x, subject, date, filepath) 
+               VALUES (?, ?, ?, ?, ?)", %i(from to subject date html_filepath)\
+               .map{|x| h[x]} )
   end
 
 end
