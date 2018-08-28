@@ -3,20 +3,26 @@
 # file: omah-plugin-sqlite.rb
 
 require 'sqlite3'
+require 'rxfhelper'
+require 'drb_sqlite'
+
 
 class OmahPluginSqlite
+  include RXFHelperModule
 
-  def initialize(settings: {}, variables: {})
+  def initialize(settings: {}, variables: {}, debug: false)
     
     dbfile = settings[:dbfile]
     
-    if File.exists? dbfile then
+    sqlite = dbfile =~ /^sqlite:\/\// ? DRbSQLite : SQLite3::Database
+    
+    if FileX.exists? dbfile then
       
-      @db = SQLite3::Database.new dbfile      
+      @db = sqlite.new dbfile      
       
     else
       
-      @db = SQLite3::Database.new dbfile
+      @db = sqlite.new dbfile
         
       # Create a database
       rows = @db.execute <<-SQL
